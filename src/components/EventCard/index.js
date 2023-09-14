@@ -30,11 +30,11 @@ const EventCard = ({
 
 EventCard.propTypes = {
   // eslint-disable-next-line react/require-default-props
-  imageSrc: PropTypes.string,
+  imageSrc: PropTypes.string.isRequired,
   imageAlt: PropTypes.string,
   date: PropTypes.instanceOf(Date).isRequired,
   // eslint-disable-next-line react/require-default-props
-  title: PropTypes.string,
+  title: PropTypes.string.isRequired,
   small: PropTypes.bool,
   label: PropTypes.string.isRequired,
 };

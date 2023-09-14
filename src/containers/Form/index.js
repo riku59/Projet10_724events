@@ -50,7 +50,7 @@ const Form = ({ onSuccess, onError }) => {
           <Field
             placeholder="Entrez votre e-mail"
             label="Email"
-            type={FIELD_TYPES.INPUT_TEXT}
+            type={FIELD_TYPES.INPUT_EMAIL}
           />
           <Button
             type={BUTTON_TYPES.SUBMIT}
