@@ -7,22 +7,24 @@ import "./style.scss";
 const Slider = () => {
   const { data } = useData();
   const [index, setIndex] = useState(0);
-  const byDateDesc = data?.focus.sort((evtA, evtB) =>
-    new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
+  const byDateDesc = data?.focus.sort(
+    (evtA, evtB) => (new Date(evtA.date) > new Date(evtB.date) ? -1 : 1) // changement de signe pour trier par date décroissante
   );
   // console.log(Date);
-  // console.log(byDateDesc);
+  console.log(byDateDesc);
   // console.log(index);
 
   const nextCard = () => {
-    setTimeout(
-      () => setIndex(index < byDateDesc.length - 1 ? index + 1 : 0), // enlever 1 a la longueur du tableau
-      5000
-    );
+    setIndex((prevIndex) =>
+      prevIndex < byDateDesc.length - 1 ? prevIndex + 1 : 0
+    ); // enlever 1 a la longueurdu tableau
   };
+
   useEffect(() => {
-    nextCard();
-  });
+    const timeout = setTimeout(nextCard, 5000);
+
+    return () => clearTimeout(timeout); // Nettoie le timeout lorsqu'il y a un changement de slide
+  }, [index, byDateDesc]);
 
   return (
     <div className="SlideCardList">

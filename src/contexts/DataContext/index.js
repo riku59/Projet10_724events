@@ -9,6 +9,15 @@ import {
 
 const DataContext = createContext({});
 
+const lastEvent = (events) => {
+  const byDateDesc = events.sort((evtA, evtB) =>
+    new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
+  ); // ajout de tout les évenements, et les trie par date
+
+  const last =
+    byDateDesc !== undefined ? byDateDesc[byDateDesc.length - 1] : []; // prend le dernier évenement du tableau.
+  return last;
+};
 export const api = {
   loadData: async () => {
     const json = await fetch("/events.json");
@@ -19,9 +28,12 @@ export const api = {
 export const DataProvider = ({ children }) => {
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
+  const [last, setLast] = useState(null);
   const getData = useCallback(async () => {
     try {
-      setData(await api.loadData());
+      const datas = await api.loadData();
+      setData(datas);
+      setLast(lastEvent(datas.events));
     } catch (err) {
       setError(err);
     }
@@ -30,13 +42,14 @@ export const DataProvider = ({ children }) => {
     if (data) return;
     getData();
   });
-  
+
   return (
     <DataContext.Provider
       // eslint-disable-next-line react/jsx-no-constructed-context-values
       value={{
         data,
         error,
+        last,
       }}
     >
       {children}
@@ -46,7 +59,7 @@ export const DataProvider = ({ children }) => {
 
 DataProvider.propTypes = {
   children: PropTypes.node.isRequired,
-}
+};
 
 export const useData = () => useContext(DataContext);
 

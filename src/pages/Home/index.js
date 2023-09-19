@@ -13,13 +13,13 @@ import Modal from "../../containers/Modal";
 import { useData } from "../../contexts/DataContext";
 
 const Page = () => {
-  const { data } = useData(); // remplacement de last par data
-  const byDateDesc = data?.events.sort((evtA, evtB) =>
-    new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
-  ); // ajout de tout les évenements, et les trie par date
+  const { last } = useData(); // remplacement de last par data
+  // const byDateDesc = data?.events.sort((evtA, evtB) =>
+  //   new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
+  // ); // ajout de tout les évenements, et les trie par date
 
-  const last =
-    byDateDesc !== undefined ? byDateDesc[byDateDesc.length - 1] : []; // prend le dernier évenement du tableau.
+  // const last =
+  //   byDateDesc !== undefined ? byDateDesc[byDateDesc.length - 1] : []; // prend le dernier évenement du tableau.
 
   return (
     // ajout de parenthèse
