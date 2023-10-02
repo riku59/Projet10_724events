@@ -40,5 +40,12 @@ describe("When slider is created", () => {
     await screen.findByText(
       "Oeuvre à la coopération entre le secteur public et le privé."
     );
+
+    const image = screen.getByAltText("World economic forum"); // ajout d'un test unitaire, qui permet de vérifier l'image en fonction de son alt
+    expect(image).toBeInTheDocument();
+    expect(image).toHaveAttribute(
+      "src",
+      "/images/evangeline-shaw-nwLTVwb7DbU-unsplash1.png"
+    );
   });
 });

@@ -23,4 +23,14 @@ describe("When Menu is created", () => {
       expect(window.document.location.hash).toEqual("#contact");
     });
   });
+  describe("and a click is triggered on Notre equipe button", () => {
+    // ajout d'un test unitaire, qui permet de vérifier que le lien notre équipe renvoie au bon endroit
+    it("scrolls to the corresponding section", async () => {
+      render(<Menu />);
+      fireEvent.click(await screen.findByText("Notre équipe"));
+
+      const notreEquipeSection = await screen.findByText("Notre équipe");
+      expect(notreEquipeSection).toBeInTheDocument();
+    });
+  });
 });
