@@ -11,8 +11,8 @@ const Slider = () => {
     (evtA, evtB) => (new Date(evtA.date) < new Date(evtB.date) ? -1 : 1) // changement de signe pour trier par date décroissante
   );
   // console.log(Date);
-  console.log(byDateDesc);
-  // console.log(index);
+  // console.log(`byDateDesc.length : ${byDateDesc.length}`);
+  console.log(`index : ${index}`);
 
   const nextCard = () => {
     setTimeout(
@@ -52,7 +52,6 @@ const Slider = () => {
               type="radio"
               name="radio-button"
               checked={index === radioIdx}
-              // onClick={() => setIndex(radioIdx)}
             />
           ))}
         </div>
